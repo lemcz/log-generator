@@ -28,7 +28,7 @@ const EXCEL_DATE_FORMAT = 'dd/MM/yyyy';
 
 const currentDate = new Date();
 const parseYear = argv['y'] || currentDate.getFullYear();
-const parseMonth = argv['m'] || currentDate.getMonth();
+const parseMonth = argv['m'] || currentDate.getMonth() + 1;
 const dateToParse = new Date(parseYear, parseMonth);
 const logReportDate = parseISO(getISOStringWithoutTime(dateToParse));
 const month = {
@@ -65,8 +65,8 @@ const worksheet = XLSX.utils.json_to_sheet(data, {
 const cellRef = XLSX.utils.encode_cell({ c: 4, r: 10 });
 const cellRef2 = XLSX.utils.encode_cell({ c: 5, r: 10 });
 worksheet['!ref'] = XLSX.utils.encode_range({ s: { c: 0, r: 0 }, e: { c: 11, r: 11 } });
-worksheet[cellRef] = { f: 'SUM(E2:E6)' };
-worksheet[cellRef2] = { f: 'SUM(F2:F6)' };
+worksheet[cellRef] = { f: 'SUM(E2:E7)' };
+worksheet[cellRef2] = { f: 'SUM(F2:F7)' };
 XLSX.utils.book_append_sheet(workbook, worksheet);
 
 XLSX.writeFile(workbook, `${CONTRACTOR_ID}_${format(logReportDate, 'yyyyMM')}.${FILE_FORMAT}`);
