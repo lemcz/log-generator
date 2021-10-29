@@ -11,7 +11,7 @@
   "dependencies": {
     "date-fns": "^2.14.0",
     "minimist": "^1.2.5",
-    "xlsx": "^0.16.2"
+    "xlsx": "^0.17.3"
   },
   "devDependencies": {
     "prettier": "^2.0.5"
