@@ -1,17 +1,19 @@
 #!usr/bin/env node
 
-const XLSX = require('xlsx');
-const startOfMonth = require('date-fns/startOfMonth');
-const endOfWeek = require('date-fns/endOfWeek');
-const endOfMonth = require('date-fns/endOfMonth');
-const eachWeekOfInterval = require('date-fns/eachWeekOfInterval');
-const differenceInBusinessDays = require('date-fns/differenceInBusinessDays');
-const addDays = require('date-fns/addDays');
-const isAfter = require('date-fns/isAfter');
-const parseISO = require('date-fns/parseISO');
-const format = require('date-fns/format');
-const argv = require('minimist')(process.argv.slice(2));
-const fs = require('fs');
+import XLSX from 'xlsx';
+import {
+  addDays,
+  differenceInBusinessDays,
+  eachWeekOfInterval,
+  endOfMonth,
+  endOfWeek,
+  format,
+  isAfter,
+  parseISO,
+  startOfMonth
+} from 'date-fns';
+import argv from 'minimist';
+import { readFileSync } from 'fs';
 
 const LABEL = {
   DATE_FROM: 'LOG_DATE_FROM',
@@ -27,8 +29,8 @@ const LABEL = {
  */
 const CONTRACTOR_ID = 'blemiec';
 const FILE_FORMAT = 'xlsx';
-const CLIENT = 'IGT';
-const ISSUE_NAME = 'Aurora Navigator';
+const CLIENT = 'Allianz Direct';
+const ISSUE_NAME = 'MultiLoB';
 const WORK_HOURS_PER_DAY = 8;
 const EXCEL_DATE_FORMAT = 'dd/MM/yyyy';
 
@@ -42,7 +44,7 @@ const {
   projectName = ISSUE_NAME,
   workHours = WORK_HOURS_PER_DAY,
   dateFormat = EXCEL_DATE_FORMAT,
-} = JSON.parse(fs.readFileSync('./config.json').toString());
+} = JSON.parse(readFileSync('./config.json').toString());
 
 const currentDate = new Date();
 const parseYear = argv['y'] || currentDate.getFullYear();
